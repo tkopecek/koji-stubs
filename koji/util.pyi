@@ -1,5 +1,6 @@
 import base64
 import koji
+import logging
 
 from typing import (
     Any,
@@ -225,7 +226,7 @@ class _RetryRmtree(Exception):
 
 def rmtree(
         path: str,
-        logger: Optional[Any] = None,
+        logger: Optional[logging.Logger] = None,
         background: bool = False) -> None:
     ...
 
@@ -290,7 +291,7 @@ def isSuccess(rv: int) -> bool:
 
 def setup_rlimits(
         opts: Any,
-        logger: Optional[Any] = None) -> None:
+        logger: Optional[logging.Logger] = None) -> None:
     ...
 
 
@@ -383,3 +384,47 @@ def format_shell_cmd(
 
 def extract_build_task(binfo: dict[str, Any]) -> int:
     ...
+
+class RepoWatcher:
+    PAUSE: int
+    TIMEOUT: int
+
+    def __init__(self,
+                 session,
+                 tag,
+                 nvrs: Optional[list[str]] = None,
+                 min_event: Optional[Union[int, str]] = None,
+                 at_event: Optional[Union[int, str]] = None,
+                 opts: Optional[dict[str, Any]] = None,
+                 logger: Optional[logging.Logger] = None):
+        ...
+
+    def get_start(self) -> float:
+        ...
+
+    def getRepo(self):
+        ...
+
+    def task_args(self):
+        ...
+
+    def waitrepo(self, anon: bool = False):
+        ...
+
+    def request(self, min_event: Optional[int] = None) -> dict:
+        ...
+
+    def wait_request(self, req: dict):
+        ...
+
+    def wait_builds(self, builds: list[str]) -> None:
+        ...
+
+    def check_repo(self, repoinfo: dict) -> bool:
+        ...
+
+    def pause(self) -> None:
+        ...
+
+    def check_timeout(self) -> bool:
+        ...

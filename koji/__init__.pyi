@@ -1094,6 +1094,26 @@ class LiveCDError(GenericError):
     ...
 
 
+class PreBuildError(BuildError):
+    ...
+
+
+class PostBuildError(BuildError):
+    ...
+
+
+class BuildrootError(BuildError):
+    ...
+
+
+class FunctionDeprecated(GenericError):
+    ...
+
+
+class ServerOffline(GenericError):
+    ...
+
+
 class PathInfo:
     topdir: str
 
@@ -2492,7 +2512,10 @@ def read_config(
 
 
 def read_config_files(
-        config_files: List[Union[str, Tuple[str, bool]]],
+        config_files: Union[
+                        str,
+                        Iterable[Union[str, Tuple[str, bool]]],
+                      ],
         raw: bool = False) -> Union[ConfigParser, RawConfigParser]:
     ...
 
