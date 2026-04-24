@@ -1070,6 +1070,10 @@ class AuthExpired(AuthError):
     ...
 
 
+class SequenceError(AuthError):
+    ...
+
+
 class AuthLockError(AuthError):
     ...
 
@@ -1099,10 +1103,6 @@ class PreBuildError(BuildError):
 
 
 class PostBuildError(BuildError):
-    ...
-
-
-class BuildrootError(BuildError):
     ...
 
 

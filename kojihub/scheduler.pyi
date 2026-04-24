@@ -125,6 +125,8 @@ def do_assign(
     override: bool = False):
     ...
 
+def auto_arch_refuse(task_id: int) -> None: ...
+
 class SchedulerExports:
     getTaskRuns: Callable
     getTaskRefusals: Callable
